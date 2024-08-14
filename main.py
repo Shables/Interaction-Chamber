@@ -22,7 +22,14 @@ def main():
                 sys.exit()
             case _:
                 print("uhh.. I have no idea what you just said. Try again.")
-        break
+        user_choice2 = input(Fore.CYAN + "\n\n\nHey, wanna do that again? (Y/N): ").lower()
+        match user_choice2:
+            case 'y':
+                main()
+            case 'n':
+                sys.exit()
+            case _:
+                print("... No clue what you just said")
 
 
 

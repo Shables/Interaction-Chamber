@@ -1,5 +1,6 @@
 import random
 import colorama
+import time
 from colorama import Fore, Back, Style
 from people_lists import generated_people
 
@@ -17,6 +18,11 @@ class Simulation():
             self.action_phase()
             self.reaction_phase()
             self.evaluation_phase()
+        else:
+            print(Fore.WHITE + Back.CYAN + "SIMULATION COMPLETE".center(50))
+            time.sleep(3)
+            print("Press Enter to be taken back to main loop")
+            input()
 
     def action_phase(self):
         print(Fore.YELLOW + "Action Phase: ")
