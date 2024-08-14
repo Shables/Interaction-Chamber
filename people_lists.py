@@ -2,7 +2,7 @@ import random
 from colorama import Fore, Style
 from people import People
 
-people_names = ['Kurt', 'Avery', 'Gwyndolin', 'Frank', 'Sera', 'Cody', 'James', 'Jonathan', 'Bruce', 'Cynthia', 'Margaret', 'Cindy', 'Xi', 'Larry', 'Heather']
+people_names = ['Kurt', 'Avery', 'Gwyndolin', 'Frank', 'Sera', 'Cody', 'James', 'Jonathan', 'Bruce', 'Cynthia', 'Margaret', 'Cindy', 'Xi', 'Larry', 'Heather', 'Scott', 'Tatiana', 'Penelope', 'Lucy', 'Mark', 'Gary']
 generated_people = []
 
 
