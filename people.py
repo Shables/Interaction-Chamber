@@ -82,10 +82,10 @@ class People():
 
 
     def calc_action_potential(self): # Calculate the action potential for this round
-        self.action_potential = ((self.openness * 1.0) // 10) + ((self.conscientiousness * 1.2) // 10)((self.extraversion * 1.5) // 10) + ((self.agreeableness * 0.8) // 10) + ((self.neuroticism * 1.3) // 10)
+        self.action_potential = ((self.openness * 1.0) // 10) + ((self.conscientiousness * 1.2) // 10) + ((self.extraversion * 1.5) // 10) + ((self.agreeableness * 0.8) // 10) + ((self.neuroticism * 1.3) // 10)
 
     def calc_reaction_potential(self): # Calculate the reaction potential for this round
-        self.reaction_potential = ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10)((self.extraversion * 0.8) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
+        self.reaction_potential = ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10) + ((self.extraversion * 0.8) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
 
 
     def calc_enjoyment(self):
