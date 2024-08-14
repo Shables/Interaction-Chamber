@@ -13,5 +13,5 @@ def generate_people():
         traits = [random.randint(0, 100) for _ in range(5)]
         generated_people.append(People(name, *traits))
     for person in generated_people:
-        print(f"Person {person_number} Generated: \n", person)
+        print(f"Person {person_number} Generated: \n", f"{person.name} -- Openness: {person.openness}, Conscientiousness: {person.conscientiousness}, Extraversion: {person.extraversion}, Agreeableness: {person.agreeableness}, Neuroticism: {person.neuroticism}")
         person_number += 1

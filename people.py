@@ -97,16 +97,16 @@ class People():
             self.enjoyment -= random.randint(5, 15)
 
         if self.acted_this_round:
-            self.enjoyment += 5 
+            self.enjoyment += random.randint(2, 8)
             if self.action() == 'rude':
                 highest_trait = max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism)
                 if highest_trait != self.neuroticism:
-                    self.enjoyment -= random.randint(5, 10)
+                    self.enjoyment -= random.randint(5, 15)
             elif self.neuroticism == max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism):
-                self.enjoyment -= random.randint(1, 5)
+                self.enjoyment -= random.randint(2, 8)
 
         if self.reacted_this_round:
-            self.enjoyment += 5
+            self.enjoyment += random.randint(2, 8)
 
         self.enjoyment = max(0, min(self.enjoyment, 100))
 
@@ -118,22 +118,22 @@ class People():
     def action(self): # Determine which action to take based on self traits
         actions = ['rude', 'joke', 'compliment', 'flirt', 'silly']
         weights = [
-            self.neuroticism,
-            self.conscientiousness,
-            self.agreeableness,
-            self.extraversion,
-            self.openness
+            ((self.neuroticism * 3) - (self.conscientiousness * 2)),
+            ((self.conscientiousness * 1.5) + self.extraversion),
+            (self.agreeableness + (self.openness * 1.2)),
+            self.extraversion * 1.5,
+            ((self.openness * 2) - self.neuroticism)
         ]
         return random.choices(actions, weights=weights)[0]
 
     def reaction(self): # Determine which reaction to take based on other actions and self traits
         reactions = ['laugh', 'smile', 'agree', 'disagree', 'scowl']
         weights = [
-            self.openness,
-            self.extraversion,
-            self.agreeableness,
-            self.conscientiousness,
-            self.neuroticism
+            ((self.openness * 2) + (self.extraversion)),
+            ((self.extraversion * 1.5) + (self.agreeableness * 1.5)),
+            (self.agreeableness * 2.5),
+            ((self.conscientiousness * 1.5) + (self.neuroticism * 1.5)),
+            ((self.neuroticism * 3) - (self.conscientiousness * 1.5))
         ]
         return random.choices(reactions, weights=weights)[0]
 

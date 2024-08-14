@@ -20,7 +20,7 @@ class Simulation():
             self.evaluation_phase()
         else:
             print(Fore.WHITE + Back.CYAN + "SIMULATION COMPLETE".center(50))
-            time.sleep(3)
+            time.sleep(2)
             print("Press Enter to be taken back to main loop")
             input()
 
@@ -56,7 +56,8 @@ class Simulation():
             person.calc_enjoyment()
             print(f"{person.name} currently has {person.enjoyment} enjoyment")
             if person.leaves():
-                print(Fore.RED + f"{person.name} is removed from the simulation.")
+                print(Fore.RED + f"!!! {person.name} is removed from the simulation. !!!".center(50))
                 self.people.remove(person)
-                print("Press enter to continue")
+                time.sleep(2)
+                print(Fore.WHITE + Back.CYAN + "### Press Enter To Continue ###".center(50))
                 input()
