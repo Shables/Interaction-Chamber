@@ -1,11 +1,13 @@
 import os
 import sys
 import colorama
+import random
+from people import People
 
 
 def main():
     while True:
-        test_input = input("Hey, it looks like you might be learning some things.", "\n Do me a favor and say, do we want to continue or nah? (Y/N): ").strip().lower()
+        test_input = input("Hey, it looks like you might be learning some things." + "\nDo me a favor and say, do we want to continue or nah? (Y/N): ").strip().lower()
         match test_input:
             case 'y':
                 continue
