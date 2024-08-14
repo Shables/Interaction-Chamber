@@ -25,6 +25,8 @@ class Simulation():
             if random.random() < person.action_potential / 100:
                 action = person.action()
                 print(Fore.BLUE + f"{person.name} does {action} action")
+                person.action_potential = 0
+                person.acted_this_round = True
             else:
                 print(f"{person.name} does no action this round.")
             
@@ -36,6 +38,8 @@ class Simulation():
             if random.random() < person.reaction_potential / 100:
                 reaction = person.reaction()              
                 print(Fore.MAGENTA + f"{person.name} reacts with {reaction} reaction")
+                person.reaction_potential = 0
+                person.reacted_this_round = True
             else:
                 print(f"{person.name} doesn't react.")
 

@@ -12,6 +12,9 @@ class People():
         self._action_potential = 0
         self._reaction_potential = 0
         self._enjoyment = 100 # Starts with full enjoyment
+        self.acted_this_round = False
+        self.reacted_this_round = False
+
 
     def __str__(self):
         return f"Name = {self.name}, Openness = {self._openness}, Conscientiousness = {self._conscientiousness}, Extraversion = {self._extraversion}, Agreeableness = {self._agreeableness}, Neuroticism = {self._neuroticism}."
@@ -82,17 +85,35 @@ class People():
 
 
     def calc_action_potential(self): # Calculate the action potential for this round
-        self.action_potential = ((self.openness * 1.0) // 10) + ((self.conscientiousness * 1.2) // 10) + ((self.extraversion * 1.5) // 10) + ((self.agreeableness * 0.8) // 10) + ((self.neuroticism * 1.3) // 10)
+        self.action_potential += ((self.openness * 1.0) // 10) + ((self.conscientiousness * 1.2) // 10) + ((self.extraversion * 1.5) // 10) + ((self.agreeableness * 0.8) // 10) + ((self.neuroticism * 1.3) // 10)
 
     def calc_reaction_potential(self): # Calculate the reaction potential for this round
-        self.reaction_potential = ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10) + ((self.extraversion * 0.8) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
+        self.reaction_potential += ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10) + ((self.extraversion * 0.8) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
 
 
     def calc_enjoyment(self):
-        pass # We want this function to check if the person either made an action or reaction in the past round, if not, loses between 5-10 enjoyment points
-             # For every rude action in the round, loses between 5-10 points if any trait except neurotic is their highest trait
-             # Conversely, for every not rude action in the round, loses between 1-5 points if neurotic is their highest trait
-             # Finally, for every action or reaction taken -- that person gains 10 enjoyment points.
+        # Checks if person made an action/reaction in the last round
+        if not self.acted_this_round and not self.reacted_this_round:
+            self.enjoyment -= random.randint(5, 15)
+
+        if self.acted_this_round:
+            self.enjoyment += 5 
+            if self.action() == 'rude':
+                highest_trait = max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism)
+                if highest_trait != self.neuroticism:
+                    self.enjoyment -= random.randint(5, 10)
+            elif self.neuroticism == max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism):
+                self.enjoyment -= random.randint(1, 5)
+
+        if self.reacted_this_round:
+            self.enjoyment += 5
+
+        self.enjoyment = max(0, min(self.enjoyment, 100))
+
+        # Reset Flags
+        self.acted_this_round = False
+        self.reacted_this_round = False
+
 
     def action(self): # Determine which action to take based on self traits
         actions = ['rude', 'joke', 'compliment', 'flirt', 'silly']
@@ -119,4 +140,5 @@ class People():
     def leaves(self): # Determine if the person has stopped enjoying themselves and decided to leave
         if self._enjoyment <= 0:
             print(f"{self.name} has stopped enjoying themselves and has decided to leave...")
-        
+            return True
+        return False
