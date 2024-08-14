@@ -1,4 +1,4 @@
-
+import random
 
 
 class People():
@@ -82,16 +82,41 @@ class People():
 
 
     def calc_action_potential(self): # Calculate the action potential for this round
-        pass
+        self.action_potential = ((self.openness * 1.0) // 10) + ((self.conscientiousness * 1.2) // 10)((self.extraversion * 1.5) // 10) + ((self.agreeableness * 0.8) // 10) + ((self.neuroticism * 1.3) // 10)
 
     def calc_reaction_potential(self): # Calculate the reaction potential for this round
-        pass
+        self.reaction_potential = ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10)((self.extraversion * 0.8) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
+
+
+    def calc_enjoyment(self):
+        pass # We want this function to check if the person either made an action or reaction in the past round, if not, loses between 5-10 enjoyment points
+             # For every rude action in the round, loses between 5-10 points if any trait except neurotic is their highest trait
+             # Conversely, for every not rude action in the round, loses between 1-5 points if neurotic is their highest trait
+             # Finally, for every action or reaction taken -- that person gains 10 enjoyment points.
 
     def action(self): # Determine which action to take based on self traits
-        pass
-    
-    def reaction(self): # Determine which reaction to take based on other actions and self traits
-        pass
+        actions = ['rude', 'joke', 'compliment', 'flirt', 'silly']
+        weights = [
+            self.neuroticism,
+            self.conscientiousness,
+            self.agreeableness,
+            self.extraversion,
+            self.openness
+        ]
+        return random.choices(actions, weights=weights)[0]
 
-    def leaves(self): # Detmine if the person has stopped enjoying themselves and decided to leave
-        pass
+    def reaction(self): # Determine which reaction to take based on other actions and self traits
+        reactions = ['laugh', 'smile', 'agree', 'disagree', 'scowl']
+        weights = [
+            self.openness,
+            self.extraversion,
+            self.agreeableness,
+            self.conscientiousness,
+            self.neuroticism
+        ]
+        return random.choices(reactions, weights=weights)[0]
+
+    def leaves(self): # Determine if the person has stopped enjoying themselves and decided to leave
+        if self._enjoyment <= 0:
+            print(f"{self.name} has stopped enjoying themselves and has decided to leave...")
+        

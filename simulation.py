@@ -15,14 +15,33 @@ class Simulation():
             self.evaluation_phase()
 
     def action_phase(self):
+        print("Action Phase: ")
         for person in self.people:
             person.calc_action_potential()
             if random.random() < person.action_potential / 100:
                 action = person.action()
+                print(f"{person.name} does {person.action} action")
+            else:
+                print(f"{person.name} does no action this round.")
             
 
     def reaction_phase(self):
-        pass
+        print("Reaction Phase: ")
+        for person in self.people:
+            person.calc_reaction_potential()
+            if random.random() < person.reaction_potential / 100:
+                reaction = person.reaction()
+                
+                print(f"{person.name} reacts with {person.reaction} reaction")
+            else:
+                print(f"{person.name} doesn't react.")
+
 
     def evaluation_phase(self):
-        pass
+        print("Evaluation Phase: ")
+        for person in self.people:
+            person.calc_enjoyment()
+            print(f"{person.name} currently has {self._enjoyment} enjoyment")
+            if person.leaves():
+                print(f"{person.name} is removed from the simulation.")
+                self.people.remove(person)
