@@ -13,6 +13,9 @@ class People():
         self._reaction_potential = 0
         self._enjoyment = 100 # Starts with full enjoyment
 
+    def __str__(self):
+        return f"Name = {self.name}, Openness = {self._openness}, Conscientiousness = {self._conscientiousness}, Extraversion = {self._extraversion}, Agreeableness = {self._agreeableness}, Neuroticism = {self._neuroticism}."
+
     @property
     def openness(self):
         return self._openness

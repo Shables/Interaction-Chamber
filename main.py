@@ -2,19 +2,20 @@ import os
 import sys
 import colorama
 import random
+import time
 from people import People
 
 
 def main():
     while True:
-        test_input = input("Hey, it looks like you might be learning some things." + "\nDo me a favor and say, do we want to continue or nah? (Y/N): ").strip().lower()
+        test_input = input("Hey, how did you get roped into this?.. well, since you're here.." + "\nWanna see a little experiment? (Y/N): ").strip().lower()
         match test_input:
             case 'y':
                 continue
             case 'n':
                 sys.exit()
             case _:
-                print("uhh.. Try again.")
+                print("uhh.. I have no idea what you just said. Try again.")
 
 
 
