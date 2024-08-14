@@ -1,4 +1,5 @@
 import random
+from colorama import Fore, Style
 from people import People
 
 people_names = ['Kurt', 'Avery', 'Gwyndolin', 'Frank', 'Sera', 'Cody', 'James', 'Jonathan', 'Bruce', 'Cynthia', 'Margaret', 'Cindy', 'Xi', 'Larry', 'Heather']
@@ -13,5 +14,7 @@ def generate_people():
         traits = [random.randint(0, 100) for _ in range(5)]
         generated_people.append(People(name, *traits))
     for person in generated_people:
-        print(f"Person {person_number} Generated: \n", f"{person.name} -- Openness: {person.openness}, Conscientiousness: {person.conscientiousness}, Extraversion: {person.extraversion}, Agreeableness: {person.agreeableness}, Neuroticism: {person.neuroticism}")
+        print(Fore.MAGENTA + f"Person {person_number} Generated:" + Style.RESET_ALL)
+        print("* {:<20} -- Openness: {:<3}, Conscientiousness: {:<3}, Extraversion: {:<3}, Agreeableness: {:<3}, Neuroticism: {:<3}".format(
+            person.name, person.openness, person.conscientiousness, person.extraversion, person.agreeableness, person.neuroticism))
         person_number += 1
