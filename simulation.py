@@ -58,3 +58,5 @@ class Simulation():
             if person.leaves():
                 print(Fore.RED + f"{person.name} is removed from the simulation.")
                 self.people.remove(person)
+                print("Press enter to continue")
+                input()

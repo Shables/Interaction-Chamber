@@ -5,7 +5,7 @@ from colorama import Fore, Back, Style
 import random
 import time
 from people import People
-from people_lists import generated_people
+from people_lists import generate_people, generated_people
 from simulation import Simulation
 
 colorama.init(autoreset=True)
@@ -15,9 +15,18 @@ def main():
         test_input = input(Fore.CYAN + "\n\n\nHey, how did you get roped into this?.. well, since you're here.." + "\nWanna see a little experiment? (Y/N): ").strip().lower()
         match test_input:
             case 'y':
-                user_choice1 = int(input("For how many rounds?: "))
-                simulation = Simulation(generated_people)
-                simulation.run_simulation(max_rounds=user_choice1)
+                while True:
+                    generate_people()
+                    user_choice3 = input(Fore.CYAN + "Are you happy with this assortment of people? (Y/N): ")
+                    match user_choice3:
+                        case 'y':
+                            user_choice1 = int(input("For how many rounds?: "))
+                            simulation = Simulation(generated_people)
+                            simulation.run_simulation(max_rounds=user_choice1)
+                        case 'n':
+                            continue
+                        case _:
+                            print("Either input a 'Y' or an 'N'")
             case 'n':
                 sys.exit()
             case _:
