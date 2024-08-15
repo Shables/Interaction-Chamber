@@ -91,35 +91,37 @@ class People():
         self.reaction_potential += ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10) + ((self.extraversion * 0.7) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
 
 
-    def calc_enjoyment(self):
-        # Checks if person made an action/reaction in the last round
-        if not self.acted_this_round and not self.reacted_this_round:
-            self.enjoyment -= random.randint(5, 15)
+    def calc_enjoyment(self, all_people, actions, reactions):
+        # Check if Neuroticism is their highest trait
+        is_neurotic = self.neuroticism == max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism)
 
-        if self.acted_this_round:
-            self.enjoyment += random.randint(2, 8)
-            if People.action(self) == 'rude':
-                highest_trait = max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism)
-                if highest_trait != self.neuroticism:
-                    self.enjoyment -= random.randint(5, 15)
-            elif self.neuroticism == max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism):
-                self.enjoyment += random.randint(2, 8)
+        # If Rude action is taken by other person, not self, neuroticism increases enjoyment. Vice Versa
+        for person in all_people:
+            if person.acted_this_round:
+                action = actions[person.name]
+                if action == 'rude':
+                    if is_neurotic:
+                        self.enjoyment += random.randint(5, 15)
+                    else:
+                        self.enjoyment -= random.randint(5, 15)
+                else:
+                    if is_neurotic:
+                        self.enjoyment -= random.randint(2, 8)
+                    else:
+                        self.enjoyment += random.randint(2, 8)
 
-        if self.reacted_this_round:
-            self.enjoyment += random.randint(2, 8)
-            if People.reaction(self) == 'scowl':
-                highest_trait = max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism)
-                if highest_trait != self.neuroticism:
-                    self.enjoyment -= random.randint(5, 15)
-            elif self.neuroticism == max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism):
-                self.enjoyment += random.randint(2, 8)
-
-        self.enjoyment = max(0, min(self.enjoyment, 100))
-
-        # Reset Flags
-        self.acted_this_round = False
-        self.reacted_this_round = False
-
+            if person.reacted_this_round:
+                reaction = reactions[person.name]
+                if reaction == 'scowl':
+                    if is_neurotic:
+                        self.enjoyment += random.randint(5, 15)
+                    else:
+                        self.enjoyment -= random.randint(5, 15)
+                else:
+                    if is_neurotic:
+                        self.enjoyment -= random.randint(2, 8)
+                    else:
+                        self.enjoyment += random.randint(2, 8)
 
     def action(self): # Determine which action to take based on self traits
         actions = ['rude', 'joke', 'compliment', 'flirt', 'silly']
