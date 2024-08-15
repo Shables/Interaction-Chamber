@@ -25,3 +25,10 @@
         # Reset Flags
         self.acted_this_round = False
         self.reacted_this_round = False
+
+
+
+
+
+       actions = {person.name: person.action() if person.acted_this_round else None for person in self.people}
+    reactions = {person.name: person.reaction() if person.reacted_this_round else None for person in self.people}

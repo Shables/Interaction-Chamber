@@ -18,9 +18,9 @@ class Simulation():
             for person in self.people:
                 person.acted_this_round = False
                 person.reacted_this_round = False
-                self.action_phase()
-                self.reaction_phase()
-                self.evaluation_phase()
+            self.action_phase()
+            self.reaction_phase()
+            self.evaluation_phase()
         else:
             print(Fore.WHITE + Back.CYAN + "SIMULATION COMPLETE".center(50))
             time.sleep(2)
@@ -59,11 +59,8 @@ class Simulation():
 
     def evaluation_phase(self):
         print(Fore.YELLOW + "Evaluation Phase: ")
-        actions = {person.name: person.action() if person.acted_this_round else None for person in self.people}
-        reactions = {person.name: person.reaction() if person.reacted_this_round else None for person in self.people}
-
         for person in self.people:
-            person.calc_enjoyment(self.people, actions, reactions)
+            person.calc_enjoyment(self.people, self.actions, self.reactions)
             print(f"{person.name} currently has {person.enjoyment} enjoyment")
             if person.leaves():
                 print(Fore.RED + f"!!! {person.name} is removed from the simulation. !!!".center(50))
@@ -73,7 +70,7 @@ class Simulation():
                 print(Fore.WHITE + Back.CYAN + "### Press Enter To Continue ###".center(50))
                 input()    
 
-        for person in self.people:        
-            print("* {:<20} -- Openness: {:<3}, Conscientiousness: {:<3}, Extraversion: {:<3}, Agreeableness: {:<3}, Neuroticism: {:<3}".format(person.name, person.openness, person.conscientiousness, person.extraversion, person.agreeableness, person.neuroticism))  
-            print(Fore.WHITE + Back.CYAN + "### Press Enter Once More To Continue ###".center(50))
-            input()
+                for person in self.people:        
+                    print("* {:<20} -- Openness: {:<3}, Conscientiousness: {:<3}, Extraversion: {:<3}, Agreeableness: {:<3}, Neuroticism: {:<3}".format(person.name, person.openness, person.conscientiousness, person.extraversion, person.agreeableness, person.neuroticism))  
+                print(Fore.WHITE + Back.CYAN + "### Press Enter Once More To Continue ###".center(50))
+                input()
