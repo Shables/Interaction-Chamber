@@ -36,6 +36,9 @@ class Simulation():
             play_sound(sim_complete_sound)
             print(Fore.WHITE + Back.CYAN + "SIMULATION COMPLETE".center(50))
             time.sleep(2)
+            for person in self.people:        
+                print("* {:<20} -- Openness: {:<3}, Conscientiousness: {:<3}, Extraversion: {:<3}, Agreeableness: {:<3}, Neuroticism: {:<3}".format(person.name, person.openness, person.conscientiousness, person.extraversion, person.agreeableness, person.neuroticism))  
+            print(Fore.WHITE + Back.CYAN + "* * * WINNERS * * *".center(50))           
             print("Press Enter to be taken back to main loop")
             input()
 
