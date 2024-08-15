@@ -3,12 +3,19 @@ import colorama
 import time
 from colorama import Fore, Back, Style
 from people_lists import generated_people
-from pydub import AudioSegment
-from pydub.playback import play
+import pygame
 
-sim_complete_sound = AudioSegment.from_file('audio/trill_complete.wav', format='wav')
-person_leaving_sound = AudioSegment.from_file('audio/grumble.wav', format='wav')
+sim_complete_sound = 'audio/trill_complete.wav'
+person_leaving_sound = 'audio/grumble.wav'
 colorama.init(autoreset=True)
+
+def play_sound(sound):
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    
 
 class Simulation():
     def __init__(self, people):
@@ -26,7 +33,7 @@ class Simulation():
             self.reaction_phase()
             self.evaluation_phase()
         else:
-            play(sim_complete_sound)
+            play_sound(sim_complete_sound)
             print(Fore.WHITE + Back.CYAN + "SIMULATION COMPLETE".center(50))
             time.sleep(2)
             print("Press Enter to be taken back to main loop")
@@ -67,8 +74,13 @@ class Simulation():
         for person in self.people:
             person.calc_enjoyment(self.people, self.actions, self.reactions)
             print(f"{person.name} currently has {person.enjoyment} enjoyment")
+            
             if person.leaves():
-                play(person_leaving_sound)
+                try:               
+                    play_sound(person_leaving_sound)
+                except Exception as e:
+                    print(f"AN ERROR OCCURED: ")
+                
                 print(Fore.RED + f"!!! {person.name} is removed from the simulation. !!!".center(50))
                 print("* {:<20} -- Openness: {:<3}, Conscientiousness: {:<3}, Extraversion: {:<3}, Agreeableness: {:<3}, Neuroticism: {:<3}".format(person.name, person.openness, person.conscientiousness, person.extraversion, person.agreeableness, person.neuroticism))             
                 self.people.remove(person)
