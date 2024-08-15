@@ -14,7 +14,7 @@ class Simulation():
     def run_simulation(self, max_rounds):
         while self.round_number < max_rounds and len(self.people) > 1:
             self.round_number += 1
-            print(Fore.GREEN + f"Round {self.round_number} of {max_rounds} has begun!")
+            print(Fore.GREEN + f"\nRound {self.round_number} of {max_rounds} has begun!")
             self.action_phase()
             self.reaction_phase()
             self.evaluation_phase()

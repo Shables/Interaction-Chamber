@@ -88,7 +88,7 @@ class People():
         self.action_potential += ((self.openness * 1.0) // 10) + ((self.conscientiousness * 1.2) // 10) + ((self.extraversion * 1.5) // 10) + ((self.agreeableness * 0.8) // 10) + ((self.neuroticism * 1.3) // 10)
 
     def calc_reaction_potential(self): # Calculate the reaction potential for this round
-        self.reaction_potential += ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10) + ((self.extraversion * 0.8) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
+        self.reaction_potential += ((self.openness * 1.3) // 10) + ((self.conscientiousness * 1.5) // 10) + ((self.extraversion * 0.7) // 10) + ((self.agreeableness * 1.0) // 10) + ((self.neuroticism * 1.2) // 10)
 
 
     def calc_enjoyment(self):
@@ -98,15 +98,21 @@ class People():
 
         if self.acted_this_round:
             self.enjoyment += random.randint(2, 8)
-            if self.action() == 'rude':
+            if People.action(self) == 'rude':
                 highest_trait = max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism)
                 if highest_trait != self.neuroticism:
                     self.enjoyment -= random.randint(5, 15)
             elif self.neuroticism == max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism):
-                self.enjoyment -= random.randint(2, 8)
+                self.enjoyment += random.randint(2, 8)
 
         if self.reacted_this_round:
             self.enjoyment += random.randint(2, 8)
+            if People.reaction(self) == 'scowl':
+                highest_trait = max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism)
+                if highest_trait != self.neuroticism:
+                    self.enjoyment -= random.randint(5, 15)
+            elif self.neuroticism == max(self.openness, self.conscientiousness, self.extraversion, self.agreeableness, self.neuroticism):
+                self.enjoyment += random.randint(2, 8)
 
         self.enjoyment = max(0, min(self.enjoyment, 100))
 
