@@ -57,6 +57,8 @@ class Simulation():
             print(f"{person.name} currently has {person.enjoyment} enjoyment")
             if person.leaves():
                 print(Fore.RED + f"!!! {person.name} is removed from the simulation. !!!".center(50))
+                print(print("* {:<20} -- Openness: {:<3}, Conscientiousness: {:<3}, Extraversion: {:<3}, Agreeableness: {:<3}, Neuroticism: {:<3}".format(person.name, person.openness, person.conscientiousness, person.extraversion, person.agreeableness, person.neuroticism)))
+                    
                 self.people.remove(person)
                 time.sleep(2)
                 print(Fore.WHITE + Back.CYAN + "### Press Enter To Continue ###".center(50))
