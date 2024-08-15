@@ -3,7 +3,11 @@ import colorama
 import time
 from colorama import Fore, Back, Style
 from people_lists import generated_people
+from pydub import AudioSegment
+from pydub.playback import play
 
+sim_complete_sound = AudioSegment.from_file('trill.complete.m4a', format='m4a')
+person_leaving_sound = AudioSegment.from_file('grumble.m4a', format='m4a')
 colorama.init(autoreset=True)
 
 class Simulation():
@@ -22,6 +26,7 @@ class Simulation():
             self.reaction_phase()
             self.evaluation_phase()
         else:
+            play(sim_complete_sound)
             print(Fore.WHITE + Back.CYAN + "SIMULATION COMPLETE".center(50))
             time.sleep(2)
             print("Press Enter to be taken back to main loop")
@@ -63,6 +68,7 @@ class Simulation():
             person.calc_enjoyment(self.people, self.actions, self.reactions)
             print(f"{person.name} currently has {person.enjoyment} enjoyment")
             if person.leaves():
+                play(person_leaving_sound)
                 print(Fore.RED + f"!!! {person.name} is removed from the simulation. !!!".center(50))
                 print("* {:<20} -- Openness: {:<3}, Conscientiousness: {:<3}, Extraversion: {:<3}, Agreeableness: {:<3}, Neuroticism: {:<3}".format(person.name, person.openness, person.conscientiousness, person.extraversion, person.agreeableness, person.neuroticism))             
                 self.people.remove(person)

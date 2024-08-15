@@ -101,32 +101,32 @@ class People():
                 action = actions[person.name]
                 if action == 'rude':
                     if is_neurotic:
-                        self.enjoyment += random.randint(5, 15)
+                        self.enjoyment += random.randint(10, 20)
                     else:
-                        self.enjoyment -= random.randint(5, 15)
+                        self.enjoyment -= random.randint(10, 20)
                 else:
                     if is_neurotic:
-                        self.enjoyment -= random.randint(2, 8)
+                        self.enjoyment -= random.randint(2, 4)
                     else:
-                        self.enjoyment += random.randint(2, 8)
+                        self.enjoyment += random.randint(2, 4)
 
             if person.reacted_this_round:
                 reaction = reactions[person.name]
                 if reaction == 'scowl':
                     if is_neurotic:
-                        self.enjoyment += random.randint(5, 15)
+                        self.enjoyment += random.randint(10, 20)
                     else:
-                        self.enjoyment -= random.randint(5, 15)
+                        self.enjoyment -= random.randint(10, 20)
                 else:
                     if is_neurotic:
-                        self.enjoyment -= random.randint(2, 8)
+                        self.enjoyment -= random.randint(2, 4)
                     else:
-                        self.enjoyment += random.randint(2, 8)
+                        self.enjoyment += random.randint(2, 4)
 
     def action(self): # Determine which action to take based on self traits
         actions = ['rude', 'joke', 'compliment', 'flirt', 'silly']
         weights = [
-            ((self.neuroticism * 3) - (self.conscientiousness * 2)),
+            ((self.neuroticism * 3) - (self.conscientiousness * 1.5)),
             ((self.conscientiousness * 1.5) + self.extraversion),
             (self.agreeableness + (self.openness * 1.2)),
             self.extraversion * 1.5,
