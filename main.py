@@ -40,35 +40,42 @@ def main():
     while True:
         print(title_art)
         time.sleep(2)
-        test_input = input(Fore.CYAN + "\n\n\nHey, how did you get roped into this?.. well, since you're here.." + "\nWanna see a little experiment? (Y/N): \n" + Style.RESET_ALL).strip().lower()
+        
+        while True:
+            test_input = input(Fore.CYAN + "\n\n\nHey, how did you get roped into this?.. well, since you're here.." + "\nWanna see a little experiment? (Y/N): \n" + Style.RESET_ALL).strip().lower()
+            if test_input in ['y', 'n']:
+                break    
+            print("uhh.. I have no idea what you just said. Try again.")
+                        
         match test_input:
             case 'y':
                 while True:
                     generate_people()
-                    user_choice3 = input(Fore.CYAN + "Are you happy with this assortment of people? (Y/N): \n" + Style.RESET_ALL).lower()
-                    match user_choice3:
-                        case 'y':
-                            user_choice1 = int(input(Fore.CYAN + "For how many rounds?: \n" + Style.RESET_ALL))
-                            simulation = Simulation(generated_people)
-                            simulation.run_simulation(max_rounds=user_choice1)
-                            print(title_art)
-                        case 'n':
-                            continue
-                        case _:
-                            print("Either input a 'Y' or an 'N'")
+                    while True:
+                        user_choice3 = input(Fore.CYAN + "Are you happy with this assortment of people? (Y/N): \n" + Style.RESET_ALL).lower()
+                        if user_choice3 in ['y', 'n']:
+                            break
+                        print("Either input a 'Y' or an 'N'")
+                    
+                    if user_choice3 == 'n':
+                        continue
+                        
+                    user_choice1 = int(input(Fore.CYAN + "For how many rounds?: \n" + Style.RESET_ALL))
+                    simulation = Simulation(generated_people)
+                    simulation.run_simulation(max_rounds=user_choice1)
+                    break           
             case 'n':
-                sys.exit()
-            case _:
-                print("uhh.. I have no idea what you just said. Try again.")
-        user_choice2 = input(Fore.CYAN + "\n\n\nHey, wanna do that again? (Y/N): \n" + Style.RESET_ALL).lower()
-        match user_choice2:
-            case 'y':
-                main()
-            case 'n':
-                sys.exit()
-            case _:
-                print("... No clue what you just said")
+                sys.exit() 
+       
+        while True:                     
+            user_choice2 = input(Fore.CYAN + "\n\n\nHey, wanna do that again? (Y/N): \n" + Style.RESET_ALL).lower()
+            if user_choice2 in ['y', 'n']:
+                break
+            print("... No clue what you just said")
 
+        if user_choice2 == 'n':
+            sys.exit()
+                
 
 
 if __name__ == '__main__':

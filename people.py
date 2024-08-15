@@ -1,4 +1,5 @@
 import random
+from colorama import Fore, Style
 
 
 class People():
@@ -101,9 +102,9 @@ class People():
                 action = actions[person.name]
                 if action == 'rude':
                     if is_neurotic:
-                        self.enjoyment += random.randint(10, 20)
+                        self.enjoyment += random.randint(10, 19)
                     else:
-                        self.enjoyment -= random.randint(10, 20)
+                        self.enjoyment -= random.randint(10, 19)
                 else:
                     if is_neurotic:
                         self.enjoyment -= random.randint(2, 4)
@@ -114,9 +115,9 @@ class People():
                 reaction = reactions[person.name]
                 if reaction == 'scowl':
                     if is_neurotic:
-                        self.enjoyment += random.randint(10, 20)
+                        self.enjoyment += random.randint(10, 19)
                     else:
-                        self.enjoyment -= random.randint(10, 20)
+                        self.enjoyment -= random.randint(10, 19)
                 else:
                     if is_neurotic:
                         self.enjoyment -= random.randint(2, 4)
@@ -147,6 +148,6 @@ class People():
 
     def leaves(self): # Determine if the person has stopped enjoying themselves and decided to leave
         if self._enjoyment <= 0:
-            print(f"{self.name} has stopped enjoying themselves and has decided to leave...")
+            print(Fore.LIGHTRED_EX + f"{self.name} has stopped enjoying themselves and has decided to leave..." + Style.RESET_ALL)
             return True
         return False
