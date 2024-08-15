@@ -11,7 +11,9 @@ def generate_people():
     generated_people.clear()
     unique_names = random.sample(people_names, 10)
     for name in unique_names:
-        traits = [random.randint(0, 100) for _ in range(5)]
+        traits = [random.randint(0, 100) for _ in range(4)]
+        neuroticism = random.randint(20, 100)
+        traits.append(neuroticism)
         generated_people.append(People(name, *traits))
     for person in generated_people:
         print(Fore.MAGENTA + f"Person {person_number} Generated:" + Style.RESET_ALL)

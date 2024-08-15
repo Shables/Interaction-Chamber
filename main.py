@@ -10,8 +10,36 @@ from simulation import Simulation
 
 colorama.init(autoreset=True)
 
+title_art = """
+
+ ██▓ ███▄    █ ▄▄▄█████▓▓█████  ██▀███   ▄▄▄       ▄████▄  ▄▄▄█████▓ ██▓ ▒█████   ███▄    █ 
+▓██▒ ██ ▀█   █ ▓  ██▒ ▓▒▓█   ▀ ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█  ▓  ██▒ ▓▒▓██▒▒██▒  ██▒ ██ ▀█   █ 
+▒██▒▓██  ▀█ ██▒▒ ▓██░ ▒░▒███   ▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▒ ▓██░ ▒░▒██▒▒██░  ██▒▓██  ▀█ ██▒
+░██░▓██▒  ▐▌██▒░ ▓██▓ ░ ▒▓█  ▄ ▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒░ ▓██▓ ░ ░██░▒██   ██░▓██▒  ▐▌██▒
+░██░▒██░   ▓██░  ▒██▒ ░ ░▒████▒░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░  ▒██▒ ░ ░██░░ ████▓▒░▒██░   ▓██░
+░▓  ░ ▒░   ▒ ▒   ▒ ░░   ░░ ▒░ ░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░  ▒ ░░   ░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+ ▒ ░░ ░░   ░ ▒░    ░     ░ ░  ░  ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒       ░     ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
+ ▒ ░   ░   ░ ░   ░         ░     ░░   ░   ░   ▒   ░          ░       ▒ ░░ ░ ░ ▒     ░   ░ ░ 
+ ░           ░             ░  ░   ░           ░  ░░ ░                ░      ░ ░           ░ 
+                                                  ░                                         
+ ▄████▄   ██░ ██  ▄▄▄       ███▄ ▄███▓ ▄▄▄▄   ▓█████  ██▀███                                
+▒██▀ ▀█  ▓██░ ██▒▒████▄    ▓██▒▀█▀ ██▒▓█████▄ ▓█   ▀ ▓██ ▒ ██▒                              
+▒▓█    ▄ ▒██▀▀██░▒██  ▀█▄  ▓██    ▓██░▒██▒ ▄██▒███   ▓██ ░▄█ ▒                              
+▒▓▓▄ ▄██▒░▓█ ░██ ░██▄▄▄▄██ ▒██    ▒██ ▒██░█▀  ▒▓█  ▄ ▒██▀▀█▄                                
+▒ ▓███▀ ░░▓█▒░██▓ ▓█   ▓██▒▒██▒   ░██▒░▓█  ▀█▓░▒████▒░██▓ ▒██▒                              
+░ ░▒ ▒  ░ ▒ ░░▒░▒ ▒▒   ▓▒█░░ ▒░   ░  ░░▒▓███▀▒░░ ▒░ ░░ ▒▓ ░▒▓░                              
+  ░  ▒    ▒ ░▒░ ░  ▒   ▒▒ ░░  ░      ░▒░▒   ░  ░ ░  ░  ░▒ ░ ▒░                              
+░         ░  ░░ ░  ░   ▒   ░      ░    ░    ░    ░     ░░   ░                               
+░ ░       ░  ░  ░      ░  ░       ░    ░         ░  ░   ░                                   
+░                                           ░                                               
+
+"""
+
+
 def main():
     while True:
+        print(title_art)
+        time.sleep(2)
         test_input = input(Fore.CYAN + "\n\n\nHey, how did you get roped into this?.. well, since you're here.." + "\nWanna see a little experiment? (Y/N): \n" + Style.RESET_ALL).strip().lower()
         match test_input:
             case 'y':
@@ -23,6 +51,7 @@ def main():
                             user_choice1 = int(input(Fore.CYAN + "For how many rounds?: \n" + Style.RESET_ALL))
                             simulation = Simulation(generated_people)
                             simulation.run_simulation(max_rounds=user_choice1)
+                            print(title_art)
                         case 'n':
                             continue
                         case _:
