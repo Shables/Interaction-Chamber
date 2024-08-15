@@ -6,8 +6,8 @@ from people_lists import generated_people
 from pydub import AudioSegment
 from pydub.playback import play
 
-sim_complete_sound = AudioSegment.from_file('trill.complete.m4a', format='m4a')
-person_leaving_sound = AudioSegment.from_file('grumble.m4a', format='m4a')
+sim_complete_sound = AudioSegment.from_file('audio/trill_complete.wav', format='wav')
+person_leaving_sound = AudioSegment.from_file('audio/grumble.wav', format='wav')
 colorama.init(autoreset=True)
 
 class Simulation():
